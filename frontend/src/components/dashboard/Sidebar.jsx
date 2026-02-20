@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, CheckSquare, User, LogOut, Zap } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
+import LiveClock from './LiveClock';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
@@ -62,6 +63,8 @@ const Sidebar = ({ isOpen, onClose }) => {
       </nav>
 
       <div className="sidebar-footer">
+        <LiveClock name={user?.name} />
+        
         <div className="user-info-sidebar">
           <div className="avatar">{initials}</div>
           <div style={{ overflow: 'hidden' }}>
