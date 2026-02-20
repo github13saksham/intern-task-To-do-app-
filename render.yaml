@@ -3,8 +3,9 @@ services:
     name: taskflow-all-in-one
     env: node
     plan: free
-    buildCommand: npm run install-all && npm run build-frontend
+    buildCommand: npm install --prefix backend && npm install --include=dev --prefix frontend && npm run build --prefix frontend
     startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
