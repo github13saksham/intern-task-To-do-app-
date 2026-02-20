@@ -41,8 +41,21 @@ const Dashboard = () => {
     ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
     : 'U';
 
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    const updateGreeting = () => {
+      const hour = new Date().getHours();
+      if (hour >= 5 && hour < 12) setGreeting('Good morning');
+      else if (hour >= 12 && hour < 17) setGreeting('Good afternoon');
+      else if (hour >= 17 && hour < 22) setGreeting('Good evening');
+      else setGreeting('Good night');
+    };
+    
+    updateGreeting();
+    const interval = setInterval(updateGreeting, 60000); // Check every minute
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
