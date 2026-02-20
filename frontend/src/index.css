@@ -45,6 +45,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ====== MOBILE HEADER ====== */
@@ -160,14 +161,16 @@ body {
 /* ====== LAYOUT ====== */
 .app-layout {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
 .main-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   background: var(--bg-primary);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ====== SIDEBAR ====== */
@@ -655,7 +658,7 @@ textarea.form-input {
 
 /* ====== AUTH PAGE ====== */
 .auth-page {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -990,7 +993,7 @@ textarea.form-input {
 @media (max-width: 1024px) {
   .sidebar {
     position: fixed;
-    height: 100vh;
+    height: 100dvh;
     left: 0;
     top: 0;
     transform: translateX(-100%);
@@ -1038,7 +1041,7 @@ textarea.form-input {
   }
 
   .page-body {
-    padding: 16px 20px;
+    padding: 16px 20px 40px;
   }
 
   .card-grid-4,
