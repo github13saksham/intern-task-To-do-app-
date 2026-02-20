@@ -1,21 +1,35 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME || 'webappdb',
-  process.env.DB_USER || 'root',
-  process.env.DB_PASS || '',
-  {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 3306,
+let sequelize;
+
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'mysql',
     logging: false,
-    dialectOptions: process.env.DB_HOST && process.env.DB_HOST !== 'localhost' ? {
+    dialectOptions: {
       ssl: {
         rejectUnauthorized: false
       }
-    } : {},
-  }
-);
+    }
+  });
+} else {
+  sequelize = new Sequelize(
+    process.env.DB_NAME || 'webappdb',
+    process.env.DB_USER || 'root',
+    process.env.DB_PASS || '',
+    {
+      host: process.env.DB_HOST || 'localhost',
+      port: process.env.DB_PORT || 3306,
+      dialect: 'mysql',
+      logging: false,
+      dialectOptions: process.env.DB_HOST && process.env.DB_HOST !== 'localhost' ? {
+        ssl: {
+          rejectUnauthorized: false
+        }
+      } : {},
+    }
+  );
+}
 
 const connectDB = async () => {
   try {
